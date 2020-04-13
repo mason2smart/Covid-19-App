@@ -1,36 +1,26 @@
-import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { SplashScreen } from 'expo';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import useLinking from './navigation/useLinking';
+import * as React from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { SplashScreen } from "expo";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import BottomTabNavigator from "./navigation/BottomTabNavigator";
+import useLinking from "./navigation/useLinking";
 
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from "./screens/HomeScreen";
+import ClinicianScreen from "./screens/ClinicianScreen";
 
-import ClinicianScreen from './screens/ClinicianScreen';
-import EpidemiologyScreen from './screens/EpidemiologyScreen';
-import RecognitionScreen from './screens/RecognitionScreen';
-import TreatmentScreen from './screens/TreatmentScreen';
+import PPEScreen from "./screens/PPEScreen";
+import ResourcesScreen from "./screens/ResourcesScreen";
 
-import VentilationScreen from './screens/VentilationScreen';
-import PPEScreen from './screens/PPEScreen';
-import ResourcesScreen from './screens/ResourcesScreen';
+import Screen from "./components/Screen";
+import ContentScreen from "./components/ContentScreen";
 
-import Vent1Screen from './screens/Vent1Screen';
-import Vent2Screen from './screens/Vent2Screen';
-import Vent3Screen from './screens/Vent3Screen';
-import Vent4Screen from './screens/Vent4Screen';
+import VentilationScreen from "./components/VentilationScreen";
+import Ventilator from "./components/Ventilator";
 
-import DiseaseAgentScreen from './screens/DiseaseAgentScreen';
-import TransmissionScreen from './screens/TransmissionScreen';
-import R0Screen from './screens/R0Screen';
-import CaseFatalityScreen from './screens/CaseFatalityScreen';
-import RiskFactorsScreen from './screens/RiskFactorsScreen';
-
-const Stack = createStackNavigator(); 
+const Stack = createStackNavigator();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -50,7 +40,19 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+           //Google FiraSans
+          "FiraSans-italic": require("./assets/fonts/FiraSans-Italic.ttf"),
+          "FiraSans-regular": require("./assets/fonts/FiraSans-Regular.ttf"),
+          "FiraSans-boldItalic": require("./assets/fonts/FiraSans-BoldItalic.ttf"),
+          "FiraSans-bold": require("./assets/fonts/FiraSans-Bold.ttf"),
+          "FiraSans-medium": require("./assets/fonts/FiraSans-Medium.ttf"),
+          "FiraSans-mediumItalic": require("./assets/fonts/FiraSans-MediumItalic.ttf"),
+          //Avenir Fonts
+          "Avenir-black": require("./assets/fonts/AvenirLTStd-Black.otf"), //avenir fonts
+          "Avenir-book": require("./assets/fonts/AvenirLTStd-Book.otf"), //avenir fonts
+          "Avenir-roman": require("./assets/fonts/AvenirLTStd-Roman.otf"), //avenir fonts
+
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -64,8 +66,7 @@ export default function App(props) {
     loadResourcesAndDataAsync();
   }, []);
 
-  // Put below View
-  /*{Platform.OS === 'ios' && <StatusBar barStyle="default" />}*/
+  Platform.OS === "ios" && <StatusBar barStyle="default" />;
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
@@ -73,31 +74,69 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {<StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+        <NavigationContainer
+          ref={containerRef}
+          initialState={initialNavigationState}
+        >
           <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-
-            <Stack.Screen name="Clinician Pocket Reference" component={ClinicianScreen} options={{ title: null }}/>
-            <Stack.Screen name="Epidemiology" component={EpidemiologyScreen} options={{ title: null }} />
-            <Stack.Screen name="Recognition" component={RecognitionScreen} options={{ title: null }}/>
-            <Stack.Screen name="Treatment" component={TreatmentScreen} options={{ title: null }}/>
-
-            <Stack.Screen name="Ventilation" component={VentilationScreen} options={{ title: null }}/>
-            <Stack.Screen name="PPE" component={PPEScreen} options={{ title: null }}/>
-            <Stack.Screen name="Resources" component={ResourcesScreen} options={{ title: null }}/>
-
-            <Stack.Screen name="Vent1" component={Vent1Screen} options={{ title: null }}/>
-            <Stack.Screen name="Vent2" component={Vent2Screen} options={{ title: null }}/>
-            <Stack.Screen name="Vent3" component={Vent3Screen} options={{ title: null }}/>
-            <Stack.Screen name="Vent4" component={Vent4Screen} options={{ title: null }}/> 
-            
-            <Stack.Screen name="DiseaseAgent" component={DiseaseAgentScreen} options={{ title: null }}/> 
-            <Stack.Screen name="Transmission" component={TransmissionScreen} options={{ title: null }}/> 
-            <Stack.Screen name="R0" component={R0Screen} options={{ title: null }}/> 
-            <Stack.Screen name="CaseFatality" component={CaseFatalityScreen} options={{ title: null }}/> 
-            <Stack.Screen name="RiskFactors" component={RiskFactorsScreen} options={{ title: null }}/> 
-
+            <Stack.Screen
+              name="Clinician Pocket Reference"
+              component={ClinicianScreen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="Ventilation"
+              component={VentilationScreen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="PPE"
+              component={PPEScreen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="Resources"
+              component={ResourcesScreen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="Subscreen"
+              component={Screen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="Contentscreen"
+              component={ContentScreen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="Ventscreen"
+              component={VentilationScreen}
+              options={{
+                title: null,
+              }}
+            />
+            <Stack.Screen
+              name="Ventilator"
+              component={Ventilator}
+              options={{
+                title: null,
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
@@ -108,6 +147,6 @@ export default function App(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });
