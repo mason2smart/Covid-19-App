@@ -11,21 +11,51 @@ export default function ResourcesScreen() {
     <Text style={styles.titleText}>Resources</Text>   
     <Text style={styles.subtitleText}>Useful Links</Text>  
       <OptionButton
-        icon="md-school"
+        icon="md-link"
         label="Hospital Epidemiology and Infection Control (HEIC) Intranet"
         onPress={() => WebBrowser.openBrowserAsync('https://www.hopkinsmedicine.org/heic/')}
       />
       <OptionButton
-        icon="md-school"
+        icon="md-link"
         label="Center for Disease Control and Prevention"
         onPress={() => WebBrowser.openBrowserAsync('https://www.cdc.gov/')}
         isLastOption
       />
 
+      <OptionButton
+        icon="md-link"
+        label="Hopkins Training Journal Clubs"
+        onPress={() => WebBrowser.openBrowserAsync('http://anesthesiology.hopkinsmedicine.org/adult-critical-care/adult-critical-care-fellowship/covid-journal-clubs/')}
+        isLastOption
+      />
+
+      <OptionButton
+        icon="md-link"
+        label="Hopkins COVID-ED"
+        onPress={() => WebBrowser.openBrowserAsync('https://livejohnshopkins.sharepoint.com/sites/COVID-ED/SitePages/ICU-IMC-Training-%26-Resources.aspx')}
+        isLastOption
+      />
+
+      <OptionButton
+        icon="md-link"
+        label="Coronavirus Resources Center"
+        onPress={() => WebBrowser.openBrowserAsync('https://coronavirus.jhu.edu/')}
+        isLastOption
+      />
+
+      <OptionButton
+        icon="md-link"
+        label="ICU Training for Non-ICU Physicians"
+        onPress={() => WebBrowser.openBrowserAsync('https://covid19.sccm.org/')}
+        isLastOption
+      />
     <Text style={styles.subtitleText}>Feedback</Text> 
-      <Text style={styles.optionText}>
-        For suggestions, comments, or updates of the content, please contact:{'\n'}{'\n'}Sergio Navarette: snavarr@jhmi.edu {'\n'}Akbhar Herekar: ahereka1@jhmi.edu {'\n'}Stamatis Baronos: sbaraono2@jhmi.edu
-      </Text>
+    <OptionButton
+        icon="md-list"
+        label="Comments or suggestions"
+        onPress={() => WebBrowser.openBrowserAsync('https://docs.google.com/forms/d/e/1FAIpQLSeKC3seFS0pgsmH4vSkr8XCpzPq4VpmWTwzGGRDlL88krpy8g/viewform?usp=sf_link')}
+        isLastOption
+      />
     </ScrollView>
 
   )
@@ -63,7 +93,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontSize: 36,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    // fontFamily: 'Avenir-roman'
   },
   subtitleText: {
     marginHorizontal: 15,
@@ -71,6 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: 'flex-start',
     fontWeight: 'bold',
+    // fontFamily: 'Avenir-roman'
   },
   option: {
     backgroundColor: '#fdfdfd',
@@ -88,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'flex-start',
     marginTop: 1,
-    paddingHorizontal: 15,
+    paddingHorizontal: 5,
+    //fontFamily: 'Avenir-roman'
   },
 });
