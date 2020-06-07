@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions, Platform} from "react-native";
 import { ScrollView, RectButton } from "react-native-gesture-handler";
 import * as WebBrowser from "expo-web-browser";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,7 +20,7 @@ export default function CPRContent({ route }) {
       const list = value.content.split("#");
       list.map((item) => {
         componentsList.push(
-          <View key={k++} style={{ flexDirection: "row", paddingLeft: offset }}>
+          <View key={k++} style={{ flexDirection: "row", paddingLeft: offset, paddingTop: (offset == 0) ? 20 : 0}}>
             <Text style={styles.text}>{"\u2022"}</Text>
             <Text style={[{ flex: 1, paddingLeft: 5 }, styles.text]}>
               {item}
@@ -37,6 +37,36 @@ export default function CPRContent({ route }) {
             <MyCheckbox data={item} offset={offset}></MyCheckbox>
           </View>
         );
+      });
+    }
+    function letters(value, offset) {
+      const list = value.content.split("#");
+      var unicode = 97;
+      list.map((item) => {
+        componentsList.push(
+          <View key={k++} style={{ flexDirection: "row", paddingLeft: offset, paddingTop: (offset == 0) ? 20 : 0}}>
+            <Text style={styles.text}>{String.fromCharCode(unicode) + "."}</Text>
+            <Text style={[{ flex: 1, paddingLeft: 5 }, styles.text]}>
+              {item}
+            </Text>
+          </View>
+        );
+        unicode = unicode + 1;
+      });
+    }
+    function numbers(value, offset) {
+      const list = value.content.split("#");
+      var number = 1;
+      list.map((item) => {
+        componentsList.push(
+          <View key={k++} style={{ flexDirection: "row", paddingLeft: offset, paddingTop: (offset == 0) ? 20 : 0}}>
+            <Text style={styles.text}>{String(number) + "."}</Text>
+            <Text style={[{ flex: 1, paddingLeft: 5 }, styles.text]}>
+              {item}
+            </Text>
+          </View>
+        );
+        number = number + 1;
       });
     }
 
@@ -62,10 +92,10 @@ export default function CPRContent({ route }) {
           bulletPoints(value, 40);
           break;
         case "mainCheckbox":
-          checkboxes(value, 0);
+          Platform.OS === "web" ? bulletPoints(value, 0) : checkboxes(value, 0);
           break;
         case "subCheckbox":
-          checkboxes(value, 40);
+          Platform.OS === "web" ? bulletPoints(value, 20) : checkboxes(value, 40);
           break;
         case "image":
           let uri =
@@ -74,7 +104,8 @@ export default function CPRContent({ route }) {
             "?alt=media&token=9b535aac-9275-4cfa-b4f3-552010ab594b";
           componentsList.push(
             <View key={k++} style={styles.contentContainer}>
-              <MyImage uri={uri} />
+              <MyImage uri={uri} backgroundColor={'#fffff'}/>
+
             </View>
           );
           break;
@@ -107,6 +138,18 @@ export default function CPRContent({ route }) {
               </RectButton>
             </View>
           );
+          break;
+        case "mainLetters":
+          letters(value, 0);
+          break;
+        case "subLetters":
+          letters(value, 20);
+          break;
+        case "mainNumbers":
+          numbers(value, 0);
+          break;
+        case "subNumbers":
+          numbers(value, 20);
           break;
       }
     });

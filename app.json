@@ -26,7 +26,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "Covid-19-Reference"
     },
-    "description": "",
-    "githubUrl": "https://github.com/mattachea/Covid-19-App"
+    "android": {
+    "package": "com.jhu.Covid19Reference"
+  },
+    "description": ""
   }
 }

@@ -11,6 +11,11 @@
     {
       "platform": "itunes",
       "id": "Covid-19-Reference"
+    },
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.jhu.Covid19Reference",
+      "id": "com.jhu.Covid19Reference"
     }
   ],
   "prefer_related_applications": true,

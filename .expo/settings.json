@@ -1,8 +1,8 @@
 {
-  "urlRandomness": "qj-m2d",
+  "urlRandomness": "fg-3yj",
   "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "https": true
+  "https": false
 }
